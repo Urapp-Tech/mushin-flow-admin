@@ -1,5 +1,20 @@
 'use client';
+import Paginator from '@/components/Paginator';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
 import {
   Table,
   TableBody,
@@ -8,25 +23,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { usePostsQuery } from '@/queries/post.query';
 import { Bell, Edit, Trash2 } from 'lucide-react';
 import { parseAsInteger, useQueryState } from 'nuqs';
 import { Fragment } from 'react';
-import Paginator from './components/Paginator';
-import { Avatar, AvatarFallback } from './components/ui/avatar';
-import { Button } from './components/ui/button';
-import { Dialog, DialogContent } from './components/ui/dialog';
-import { Input } from './components/ui/input';
-import { Label } from './components/ui/label';
-import { Separator } from './components/ui/separator';
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-} from './components/ui/sheet';
-import { usePostsQuery } from './queries/post.query';
 
 const transactionsData = [
   {

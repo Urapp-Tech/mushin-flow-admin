@@ -1,4 +1,4 @@
-type Key = 'IS_ACCOUNT_SAVED' | 'TOKEN';
+type Key = 'IS_ACCOUNT_SAVED' | 'TOKEN' | 'USER';
 
 function addKeyPrefix(key: string) {
   const prefix = 'WED_WISE_WEB_APP';

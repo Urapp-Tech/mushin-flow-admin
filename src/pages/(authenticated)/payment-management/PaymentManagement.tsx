@@ -1,4 +1,5 @@
 'use client';
+import Paginator from '@/components/Paginator';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,7 +12,6 @@ import {
 } from '@/components/ui/table';
 import { Edit, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import Paginator from './components/Paginator';
 
 const bartendersData = [
   {

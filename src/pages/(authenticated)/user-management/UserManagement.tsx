@@ -1,5 +1,7 @@
 'use client';
+import Paginator from '@/components/Paginator';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Table,
   TableBody,
@@ -8,12 +10,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useDeletePostMutation, usePostsQuery } from '@/queries/post.query';
 import { debounce } from 'lodash';
 import { Search, Trash2 } from 'lucide-react';
 import { parseAsInteger, useQueryState } from 'nuqs';
-import Paginator from './components/Paginator';
-import { Input } from './components/ui/input';
-import { useDeletePostMutation, usePostsQuery } from './queries/post.query';
 
 function UserManagement() {
   const [currentLimit, _setCurrentLimit] = useQueryState(

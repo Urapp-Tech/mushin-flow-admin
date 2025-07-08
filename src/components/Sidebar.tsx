@@ -3,12 +3,12 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { BarChart3, CreditCard, Settings, Users } from 'lucide-react';
 import { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { cn } from '../lib/utils';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from './components/ui/collapsible';
-import { cn } from './lib/utils';
+} from './ui/collapsible';
 
 function Sidebar() {
   const navigate = useNavigate();

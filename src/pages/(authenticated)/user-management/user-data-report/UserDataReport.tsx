@@ -1,4 +1,6 @@
 'use client';
+import Paginator from '@/components/Paginator';
+import { Input } from '@/components/ui/input';
 import {
   Table,
   TableBody,
@@ -11,9 +13,7 @@ import { format } from 'date-fns';
 import { debounce } from 'lodash';
 import { Search } from 'lucide-react';
 import { parseAsInteger, useQueryState } from 'nuqs';
-import Paginator from './components/Paginator';
-import { Input } from './components/ui/input';
-import { usePostsQuery } from './queries/post.query';
+import { usePostsQuery } from '../../../../queries/post.query';
 
 function UserDataReport() {
   const [currentLimit, _setCurrentLimit] = useQueryState(

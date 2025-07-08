@@ -1,4 +1,4 @@
-type Key = 'TOKEN';
+type Key = 'TOKEN' | 'USER';
 
 function addKeyPrefix(key: string) {
   const prefix = 'WED_WISE_WEB_APP';

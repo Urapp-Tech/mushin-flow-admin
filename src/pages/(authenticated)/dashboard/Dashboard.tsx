@@ -24,7 +24,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from './components/ui/chart';
+} from '@/components/ui/chart';
 
 const lineChartData = [
   { month: 'January', percentage: 74 },

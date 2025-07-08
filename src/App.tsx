@@ -6,20 +6,31 @@ import {
   Navigate,
   RouterProvider,
 } from 'react-router-dom';
-import Dashboard from './Dashboard';
-import Layout from './Layout';
-import PaymentManagement from './PaymentManagement';
-import TransactionDataReport from './TransactionDataReport';
-import UserDataReport from './UserDataReport';
-import UserManagement from './UserManagement';
+import { Toaster } from 'sonner';
+import AuthenticationGuard from './guards/AuthenticationGuard';
+import Dashboard from './pages/(authenticated)/dashboard/Dashboard';
+import Layout from './pages/(authenticated)/Layout';
+import PaymentManagement from './pages/(authenticated)/payment-management/PaymentManagement';
+import TransactionDataReport from './pages/(authenticated)/transaction-data-report/TransactionDataReport';
+import UserDataReport from './pages/(authenticated)/user-management/user-data-report/UserDataReport';
+import UserManagement from './pages/(authenticated)/user-management/UserManagement';
+import SignIn from './pages/(unauthenticated)/sign-in/SignIn';
 
 window.Buffer = Buffer;
 
 const router = createBrowserRouter(
   [
     {
+      path: 'sign-in',
+      element: <SignIn />,
+    },
+    {
       path: '/',
-      element: <Layout />,
+      element: (
+        <AuthenticationGuard>
+          <Layout />
+        </AuthenticationGuard>
+      ),
       children: [
         {
           index: true,
@@ -65,6 +76,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <NuqsAdapter>
         <RouterProvider router={router} />
+        <Toaster position="top-center" />
       </NuqsAdapter>
     </QueryClientProvider>
   );
