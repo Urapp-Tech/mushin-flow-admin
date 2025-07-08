@@ -1,35 +1,58 @@
+import AuthenticationGuard from '@/guards/AuthenticationGuard';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Buffer } from 'buffer';
 import { NuqsAdapter } from 'nuqs/adapters/react-router/v6';
+import { lazy, Suspense } from 'react';
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
-import AuthenticationGuard from './guards/AuthenticationGuard';
-import Dashboard from './pages/(authenticated)/dashboard/Dashboard';
-import Layout from './pages/(authenticated)/Layout';
-import PaymentManagement from './pages/(authenticated)/payment-management/PaymentManagement';
-import TransactionDataReport from './pages/(authenticated)/transaction-data-report/TransactionDataReport';
-import UserDataReport from './pages/(authenticated)/user-management/user-data-report/UserDataReport';
-import UserManagement from './pages/(authenticated)/user-management/UserManagement';
-import SignIn from './pages/(unauthenticated)/sign-in/SignIn';
 
 window.Buffer = Buffer;
+
+const SignIn = lazy(() => import('@/pages/(unauthenticated)/sign-in/SignIn'));
+
+const Layout = lazy(() => import('@/pages/(authenticated)/Layout'));
+const Dashboard = lazy(
+  () => import('@/pages/(authenticated)/dashboard/Dashboard')
+);
+const UserManagement = lazy(
+  () => import('@/pages/(authenticated)/user-management/UserManagement')
+);
+const PaymentManagement = lazy(
+  () => import('@/pages/(authenticated)/payment-management/PaymentManagement')
+);
+const UserDataReport = lazy(
+  () => import('@/pages/(authenticated)/user-data-report/UserDataReport')
+);
+const TransactionDataReport = lazy(
+  () =>
+    import(
+      '@/pages/(authenticated)/transaction-data-report/TransactionDataReport'
+    )
+);
 
 const router = createBrowserRouter(
   [
     {
       path: 'sign-in',
-      element: <SignIn />,
+
+      element: (
+        <Suspense fallback={<div>loading ...</div>}>
+          <SignIn />
+        </Suspense>
+      ),
     },
     {
       path: '/',
       element: (
-        <AuthenticationGuard>
-          <Layout />
-        </AuthenticationGuard>
+        <Suspense fallback={<div>loading ...</div>}>
+          <AuthenticationGuard>
+            <Layout />
+          </AuthenticationGuard>
+        </Suspense>
       ),
       children: [
         {
@@ -38,23 +61,43 @@ const router = createBrowserRouter(
         },
         {
           path: 'dashboard',
-          element: <Dashboard />,
+          element: (
+            <Suspense fallback={<div>loading ...</div>}>
+              <Dashboard />
+            </Suspense>
+          ),
         },
         {
           path: 'user-management',
-          element: <UserManagement />,
+          element: (
+            <Suspense fallback={<div>loading ...</div>}>
+              <UserManagement />
+            </Suspense>
+          ),
         },
         {
           path: 'payment-management',
-          element: <PaymentManagement />,
+          element: (
+            <Suspense fallback={<div>loading ...</div>}>
+              <PaymentManagement />
+            </Suspense>
+          ),
         },
         {
           path: 'user-data-report',
-          element: <UserDataReport />,
+          element: (
+            <Suspense fallback={<div>loading ...</div>}>
+              <UserDataReport />
+            </Suspense>
+          ),
         },
         {
           path: 'transaction-data-report',
-          element: <TransactionDataReport />,
+          element: (
+            <Suspense fallback={<div>loading ...</div>}>
+              <TransactionDataReport />
+            </Suspense>
+          ),
         },
       ],
     },
@@ -73,12 +116,14 @@ function App() {
   });
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <NuqsAdapter>
-        <RouterProvider router={router} />
-        <Toaster position="top-center" />
-      </NuqsAdapter>
-    </QueryClientProvider>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <NuqsAdapter>
+          <RouterProvider router={router} />
+        </NuqsAdapter>
+      </QueryClientProvider>
+      <Toaster position="top-center" />
+    </>
   );
 }
 

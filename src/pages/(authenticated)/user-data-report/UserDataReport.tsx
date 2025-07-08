@@ -9,11 +9,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { usePostsQuery } from '@/queries/post.query';
 import { format } from 'date-fns';
 import { debounce } from 'lodash';
 import { Search } from 'lucide-react';
 import { parseAsInteger, useQueryState } from 'nuqs';
-import { usePostsQuery } from '../../../../queries/post.query';
 
 function UserDataReport() {
   const [currentLimit, _setCurrentLimit] = useQueryState(
